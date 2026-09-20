@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Office Dashboard</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f5f7fb;
+
+            color: #1f2937;
+
+        }
+
+
+        .layout {
+
+            display: flex;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* SIDEBAR */
+
+        .sidebar {
+
+            width: 250px;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 25px 18px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            margin-bottom: 40px;
+
+            padding-left: 10px;
+
+        }
+
+
+        .logo span {
+
+            color: #60a5fa;
+
+        }
+
+
+        .menu-title {
+
+            font-size: 12px;
+
+            color: #9ca3af;
+
+            margin: 20px 10px 10px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .menu a {
+
+            display: block;
+
+            color: #d1d5db;
+
+            text-decoration: none;
+
+            padding: 13px 12px;
+
+            border-radius: 8px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .menu a:hover,
+        .menu a.active {
+
+            background: #2563eb;
+
+            color: white;
+
+        }
+
+
+        /* MAIN */
+
+        .main {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+
+            height: 70px;
+
+            background: white;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+        }
+
+
+        .navbar h2 {
+
+            font-size: 22px;
+
+        }
+
+
+        .profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+        }
+
+
+        /* CONTENT */
+
+        .content {
+
+            padding: 30px;
+
+        }
+
+
+        .welcome {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .welcome h1 {
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .welcome p {
+
+            color: #6b7280;
+
+        }
+
+
+        /* CARDS */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e5e7eb;
+
+        }
+
+
+        .card-title {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .card-value {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* PANELS */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr;
+
+            gap: 20px;
+
+        }
+
+
+        .panel {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+        }
+
+
+        .panel h3 {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .info-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #eee;
+
+        }
+
+
+        .info-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .label {
+
+            color: #6b7280;
+
+        }
+
+
+        .value {
+
+            font-weight: bold;
+
+        }
+
+
+        .notice {
+
+            background: #eff6ff;
+
+            border-left: 4px solid #2563eb;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            color: #1e40af;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .cards {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+
+                display: none;
+
+            }
+
+            .content {
+
+                padding: 20px;
+
+            }
+
+            .navbar {
+
+                padding: 0 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            My<span>Dashboard</span>
+
+        </div>
+
+
+        <div class="menu-title">
+
+            Office
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="#" class="active">
+
+                📊 Dashboard
+
+            </a>
+
+
+            <a href="#">
+
+                👥 Customers
+
+            </a>
+
+
+            <a href="#">
+
+                📦 Orders
+
+            </a>
+
+
+            <a href="#">
+
+                💰 Payments
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="menu-title">
+
+            Account
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="{% url 'logout' %}">
+
+                🚪 Logout
+
+            </a>
+
+        </nav>
+
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- NAVBAR -->
+
+        <header class="navbar">
+
+
+            <h2>
+
+                Office Dashboard
+
+            </h2>
+
+
+            <div class="profile">
+
+
+                <div>
+
+                    <strong>
+
+                        {{ request.user.username }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- CONTENT -->
+
+        <section class="content">
+
+
+            <div class="welcome">
+
+
+                <h1>
+
+                    Welcome, {{ request.user.first_name|default:request.user.username }} 👋
+
+                </h1>
+
+
+                <p>
+
+                    Welcome to your office dashboard.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- CARDS -->
+
+            <div class="cards">
+
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        My Orders
+
+                    </div>
+
+                    <div class="card-value">
+
+                        {{ my_orders }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        Completed Orders
+
+                    </div>
+
+                    <div class="card-value">
+
+                        {{ completed_orders }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        Pending Orders
+
+                    </div>
+
+                    <div class="card-value">
+
+                        {{ pending_orders }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="grid">
+
+
+                <!-- ACCOUNT INFORMATION -->
+
+                <div class="panel">
+
+
+                    <h3>
+
+                        My Account
+
+                    </h3>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+
+                            Username
+
+                        </span>
+
+                        <span class="value">
+
+                            {{ request.user.username }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+
+                            Email
+
+                        </span>
+
+                        <span class="value">
+
+                            {{ request.user.email|default:"Not provided" }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+
+                            First Name
+
+                        </span>
+
+                        <span class="value">
+
+                            {{ request.user.first_name|default:"Not provided" }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+
+                            Last Name
+
+                        </span>
+
+                        <span class="value">
+
+                            {{ request.user.last_name|default:"Not provided" }}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- NOTICE -->
+
+                <div class="panel">
+
+
+                    <h3>
+
+                        Office Notice
+
+                    </h3>
+
+
+                    <div class="notice">
+
+                        You are logged in as an office user.
+
+                        Your account is managed by the administrator.
+
+                        If you need any account changes,
+
+                        please contact the administrator.
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
